@@ -42,6 +42,9 @@ class PokedexCollectionViewController: UICollectionViewController, UICollectionV
             guard let formArray = forms else { return }
             self.pokemonForms = formArray
         }
+        let backgroundImage = UIImage(named: "Team_instinct_loading_screen")
+        let imageView = UIImageView(image: backgroundImage)
+        self.collectionView.backgroundView = imageView
         
 //        pokeAPI.fetchPokemon { (pokedex, error) in
 //            if let error = error {
