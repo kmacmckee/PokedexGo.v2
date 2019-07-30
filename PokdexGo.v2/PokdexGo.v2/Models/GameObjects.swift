@@ -7,16 +7,19 @@
 //
 
 import Foundation
+import UIKit
 
 
 struct GameObjects: Codable {
     
-    var itemTemplates: [templates]
+    var itemTemplates: [Templates]
     
     
-    struct templates: Codable {
+    struct Templates: Codable {
         
-        var id: String
+        var spritesData: [Data]?
+        
+        var templateId: String
         
         //var avatarCustomization: avatarCustomization?
         
@@ -37,7 +40,8 @@ struct GameObjects: Codable {
         //var weatherAffinities: weatherAffinities?
         
         enum CodingKeys: String, CodingKey {
-            case id = "templateId"
+            case templateId
+            case spritesData
             case pokemonForms = "formSettings"
             case pokemon = "pokemonSettings"
             

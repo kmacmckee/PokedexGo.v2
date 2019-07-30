@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 class PokedexAPI {
     
@@ -46,13 +47,12 @@ class PokedexAPI {
     
     
     
-    func fetchBasePokemonOnly(completion: @escaping ([PokemonDetails]?, Error?) -> Void) {
+    func fetchSquirtle() {
         
         let dataTask = URLSession.shared.dataTask(with: baseURL) { (data, _, error) in
             
             if let error = error {
                 NSLog("Error fetching pokemon: \(error)")
-                completion(nil, error)
                 return
             }
             
@@ -64,18 +64,21 @@ class PokedexAPI {
             do {
                 let pokedexDict = try JSONDecoder().decode(GameObjects.self, from: data)
                 
-                print(pokedexDict)
+                let templates = pokedexDict.itemTemplates
+                var squirtleObjects: [GameObjects.Templates] = []
+                for template in templates {
+                    if template.templateId.contains("V0007_POKEMON_SQUIRTLE") {
+                        squirtleObjects.append(template)
+                    }
+                }
+                
+                var sprites: [UIImage] = []
                 
                 
-//                let templates = pokedexDict.itemTemplates
-//                let pokemon = templates.compactMap({ $0.pokemon })
-//                self.pokemons = pokemon
-//                print(pokemon.count)
-//                completion(pokemon, nil)
+                print(squirtleObjects.compactMap({ $0.templateId }))
                 
             } catch {
                 NSLog("Error decoding pokedex dictionary: \(error)")
-                completion(nil, error)
                 return
             }
         }
@@ -83,6 +86,8 @@ class PokedexAPI {
         
         
     }
+    
+    
     
     
     

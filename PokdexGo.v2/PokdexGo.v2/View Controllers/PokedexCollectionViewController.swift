@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreImage
 
 private let reuseIdentifier = "PokemonCell"
 
@@ -30,6 +31,8 @@ class PokedexCollectionViewController: UICollectionViewController, UICollectionV
 //            }
 //        }
 //    }
+    
+    
 
     
     override func viewDidLoad() {
@@ -42,9 +45,15 @@ class PokedexCollectionViewController: UICollectionViewController, UICollectionV
             guard let formArray = forms else { return }
             self.pokemonForms = formArray
         }
-        let backgroundImage = UIImage(named: "Team_instinct_loading_screen")
+        
+        
+        //pokeAPI.fetchSquirtle()
+        
+        let backgroundImage = UIImage(named: "Team_instinct_loading_screen")!
         let imageView = UIImageView(image: backgroundImage)
         self.collectionView.backgroundView = imageView
+        
+        
         
 //        pokeAPI.fetchPokemon { (pokedex, error) in
 //            if let error = error {
@@ -103,7 +112,7 @@ class PokedexCollectionViewController: UICollectionViewController, UICollectionV
     
         let poke = pokemonForms[indexPath.row]
         
-        cell.imageView.image = UIImage(named: "pokeball")
+        cell.imageView.image = UIImage(named: "pokemon_icon_103_00")
         cell.pokemonLabel.text = poke.pokemonName.capitalized
         
     
