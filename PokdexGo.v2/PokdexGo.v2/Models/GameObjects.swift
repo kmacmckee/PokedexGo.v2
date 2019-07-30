@@ -1,5 +1,5 @@
 //
-//  PokeDictionary.swift
+//  GameObjects.swift
 //  PokdexGo.v2
 //
 //  Created by Kobe McKee on 7/29/19.
@@ -9,10 +9,9 @@
 import Foundation
 
 
-struct PokeDictionary: Codable {
+struct GameObjects: Codable {
     
     var itemTemplates: [templates]
-    
     
     
     struct templates: Codable {
@@ -31,7 +30,7 @@ struct PokeDictionary: Codable {
         
         //var itemSettings: itemSettings?
         
-        var pokemon: Pokemon?
+        var pokemon: PokemonDetails?
         
         //var moveSettings: moveSettings?
         

@@ -15,6 +15,7 @@ struct PokemonForms: Codable {
     
     enum CodingKeys: String, CodingKey {
         case pokemonName = "pokemon"
+        case forms = "forms"
     }
     
     struct Forms: Codable {

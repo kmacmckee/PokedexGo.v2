@@ -10,7 +10,7 @@ import Foundation
 
 class FetchPokemonDetailsOperation: ConcurrentOperation {
     
-    private(set) var pokemonDetails: Pokemon?
+    private(set) var pokemonDetailsArray: [PokemonDetails]?
     private var dataTask: URLSessionDataTask?
     private var session: URLSession
     
@@ -45,22 +45,18 @@ class FetchPokemonDetailsOperation: ConcurrentOperation {
             }
             
             do {
-                let pokedexDict = try JSONDecoder().decode(PokeDictionary.self, from: data)
+                let pokedexDict = try JSONDecoder().decode(GameObjects.self, from: data)
                 let templates = pokedexDict.itemTemplates
                 let pokemons = templates.compactMap({ $0.pokemon })
                 
+                var pokemonArray: [PokemonDetails] = []
+                for pokemon in pokemons {
+                    if pokemon.pokemonId.contains(self.pokemonName) {
+                        pokemonArray.append(pokemon)
+                    }
+                }
                 
-                
-                
-                
-                //let pokemonForms = pokemons.map({ $0.form?.contains(self.pokemonName) })
-//                for pokemon in pokemons {
-//                    if pokemon.form?.contains(self.pokemonName) ??  {
-//
-//                    }
-//
-//                }
-                
+                self.pokemonDetailsArray = pokemonArray
                 
             } catch {
                 NSLog("Error decoding pokedex dictionary: \(error)")
@@ -69,9 +65,6 @@ class FetchPokemonDetailsOperation: ConcurrentOperation {
             }
         }
         dataTask.resume()
-        
-        
-        
         
     }
     

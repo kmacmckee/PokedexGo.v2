@@ -6,18 +6,19 @@
 //  Copyright © 2019 Kobe McKee. All rights reserved.
 //
 
-//import Foundation
+import Foundation
+import UIKit
+
+class FetchMainSpriteOperation: ConcurrentOperation {
 //
-//class FetchMainSpriteOperation: ConcurrentOperation {
-//
-//    private(set) var imageData: Data?
+//    private(set) var image: UIImage?
 //    private var dataTask: URLSessionDataTask?
 //    private let session: URLSession
 //
-//    var pokemonName: String
+//    var pokemonDexId: String
 //
-//    init(form: PokemonForms, session: URLSession = URLSession.shared) {
-//        self.pokemonName = form.pokemonName
+//    init(pokemon: PokemonDetails, session: URLSession = URLSession.shared) {
+//        self.pokemon = pokemon.template
 //        self.session = session
 //        super.init()
 //    }
@@ -49,5 +50,5 @@
 //        dataTask?.cancel()
 //    }
 //
-//
-//}
+
+}

@@ -18,10 +18,18 @@ class PokedexCollectionViewController: UICollectionViewController, UICollectionV
         didSet {
             DispatchQueue.main.async {
                 self.collectionView.reloadData()
+                print(self.pokemonForms)
             }
         }
     }
-    
+//    private var pokemon = [PokemonDetails]() {
+//        didSet {
+//            DispatchQueue.main.async {
+//                self.collectionView.reloadData()
+//                print(self.pokemon)
+//            }
+//        }
+//    }
 
     
     override func viewDidLoad() {
@@ -34,6 +42,15 @@ class PokedexCollectionViewController: UICollectionViewController, UICollectionV
             guard let formArray = forms else { return }
             self.pokemonForms = formArray
         }
+        
+//        pokeAPI.fetchPokemon { (pokedex, error) in
+//            if let error = error {
+//                NSLog("Error fetching pokemon: \(error)")
+//                return
+//            }
+//            guard let pokemon = pokedex else { return }
+//            self.pokemon = pokemon
+//        }
 
     }
     

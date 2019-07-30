@@ -1,5 +1,5 @@
 //
-//  Pokemon.swift
+//  PokemonDetails.swift
 //  PokdexGo.v2
 //
 //  Created by Kobe McKee on 7/29/19.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct Pokemon: Codable {
+struct PokemonDetails: Codable {
     
     var pokemonId: String
     var type: String
@@ -25,6 +25,8 @@ struct Pokemon: Codable {
     var evolutionBranch: [Evolutions]?
     
     var thirdMove: ThirdMove?
+    
+    var pokemonForms: PokemonForms?
     
     
     struct Stats: Codable {

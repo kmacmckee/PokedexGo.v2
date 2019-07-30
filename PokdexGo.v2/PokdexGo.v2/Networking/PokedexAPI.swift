@@ -12,8 +12,8 @@ class PokedexAPI {
     
     var baseURL = URL(string: "https://raw.githubusercontent.com/pokemongo-dev-contrib/pokemongo-game-master/master/versions/latest/GAME_MASTER.json")!
     
-    var pokedex: PokeDictionary?
-    var pokemons: [Pokemon]?
+    var pokedex: GameObjects?
+    var pokemons: [PokemonDetails]?
     var forms: [PokemonForms]?
     
     func fetchPokedex() {
@@ -33,7 +33,7 @@ class PokedexAPI {
             }
             
             do {
-                let pokedexDict = try JSONDecoder().decode(PokeDictionary.self, from: data)
+                let pokedexDict = try JSONDecoder().decode(GameObjects.self, from: data)
                 self.pokedex = pokedexDict
                 
             } catch {
@@ -46,10 +46,7 @@ class PokedexAPI {
     
     
     
-    
-    
-    
-    func fetchPokemon(completion: @escaping ([Pokemon]?, Error?) -> Void) {
+    func fetchBasePokemonOnly(completion: @escaping ([PokemonDetails]?, Error?) -> Void) {
         
         let dataTask = URLSession.shared.dataTask(with: baseURL) { (data, _, error) in
             
@@ -65,7 +62,49 @@ class PokedexAPI {
             }
             
             do {
-                let pokedexDict = try JSONDecoder().decode(PokeDictionary.self, from: data)
+                let pokedexDict = try JSONDecoder().decode(GameObjects.self, from: data)
+                
+                print(pokedexDict)
+                
+                
+//                let templates = pokedexDict.itemTemplates
+//                let pokemon = templates.compactMap({ $0.pokemon })
+//                self.pokemons = pokemon
+//                print(pokemon.count)
+//                completion(pokemon, nil)
+                
+            } catch {
+                NSLog("Error decoding pokedex dictionary: \(error)")
+                completion(nil, error)
+                return
+            }
+        }
+        dataTask.resume()
+        
+        
+    }
+    
+    
+    
+    
+    
+    func fetchPokemon(completion: @escaping ([PokemonDetails]?, Error?) -> Void) {
+        
+        let dataTask = URLSession.shared.dataTask(with: baseURL) { (data, _, error) in
+            
+            if let error = error {
+                NSLog("Error fetching pokemon: \(error)")
+                completion(nil, error)
+                return
+            }
+            
+            guard let data = data else {
+                NSLog("No data returned when fetching pokemon")
+                return
+            }
+            
+            do {
+                let pokedexDict = try JSONDecoder().decode(GameObjects.self, from: data)
                 let templates = pokedexDict.itemTemplates
                 let pokemon = templates.compactMap({ $0.pokemon })
                 self.pokemons = pokemon
@@ -98,7 +137,7 @@ class PokedexAPI {
             }
             
             do {
-                let pokedexDict = try JSONDecoder().decode(PokeDictionary.self, from: data)
+                let pokedexDict = try JSONDecoder().decode(GameObjects.self, from: data)
                 let templates = pokedexDict.itemTemplates
                 let pokemonForms = templates.compactMap({ $0.pokemonForms })
                 self.forms = pokemonForms

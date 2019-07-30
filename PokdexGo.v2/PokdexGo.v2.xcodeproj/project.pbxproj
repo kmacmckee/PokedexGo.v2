@@ -14,8 +14,8 @@
 		C47FAF6222EFA4550098A184 /* PokdexGo_v2Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C47FAF6122EFA4550098A184 /* PokdexGo_v2Tests.swift */; };
 		C47FAF6D22EFA7140098A184 /* PokedexCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C47FAF6C22EFA7140098A184 /* PokedexCollectionViewController.swift */; };
 		C47FAF6F22EFA92D0098A184 /* PokemonCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C47FAF6E22EFA92D0098A184 /* PokemonCollectionViewCell.swift */; };
-		C47FAF7122EFABC70098A184 /* Pokemon.swift in Sources */ = {isa = PBXBuildFile; fileRef = C47FAF7022EFABC70098A184 /* Pokemon.swift */; };
-		C47FAF7322EFAC0B0098A184 /* PokeDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = C47FAF7222EFAC0B0098A184 /* PokeDictionary.swift */; };
+		C47FAF7122EFABC70098A184 /* PokemonDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = C47FAF7022EFABC70098A184 /* PokemonDetails.swift */; };
+		C47FAF7322EFAC0B0098A184 /* GameObjects.swift in Sources */ = {isa = PBXBuildFile; fileRef = C47FAF7222EFAC0B0098A184 /* GameObjects.swift */; };
 		C47FAF7522EFB0AF0098A184 /* PokedexAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = C47FAF7422EFB0AF0098A184 /* PokedexAPI.swift */; };
 		C47FAF7922EFBB9C0098A184 /* ConcurrentOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C47FAF7822EFBB9C0098A184 /* ConcurrentOperation.swift */; };
 		C47FAF7D22EFC1DC0098A184 /* PokemonForms.swift in Sources */ = {isa = PBXBuildFile; fileRef = C47FAF7C22EFC1DC0098A184 /* PokemonForms.swift */; };
@@ -46,8 +46,8 @@
 		C47FAF6322EFA4550098A184 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C47FAF6C22EFA7140098A184 /* PokedexCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokedexCollectionViewController.swift; sourceTree = "<group>"; };
 		C47FAF6E22EFA92D0098A184 /* PokemonCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonCollectionViewCell.swift; sourceTree = "<group>"; };
-		C47FAF7022EFABC70098A184 /* Pokemon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pokemon.swift; sourceTree = "<group>"; };
-		C47FAF7222EFAC0B0098A184 /* PokeDictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokeDictionary.swift; sourceTree = "<group>"; };
+		C47FAF7022EFABC70098A184 /* PokemonDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonDetails.swift; sourceTree = "<group>"; };
+		C47FAF7222EFAC0B0098A184 /* GameObjects.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameObjects.swift; sourceTree = "<group>"; };
 		C47FAF7422EFB0AF0098A184 /* PokedexAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokedexAPI.swift; sourceTree = "<group>"; };
 		C47FAF7822EFBB9C0098A184 /* ConcurrentOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConcurrentOperation.swift; sourceTree = "<group>"; };
 		C47FAF7C22EFC1DC0098A184 /* PokemonForms.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonForms.swift; sourceTree = "<group>"; };
@@ -131,9 +131,9 @@
 		C47FAF7B22EFBD2B0098A184 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				C47FAF7022EFABC70098A184 /* Pokemon.swift */,
+				C47FAF7022EFABC70098A184 /* PokemonDetails.swift */,
 				C47FAF7C22EFC1DC0098A184 /* PokemonForms.swift */,
-				C47FAF7222EFAC0B0098A184 /* PokeDictionary.swift */,
+				C47FAF7222EFAC0B0098A184 /* GameObjects.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -259,8 +259,8 @@
 				C47FAF8322EFC5360098A184 /* FetchMainSpriteOperation.swift in Sources */,
 				C47FAF7922EFBB9C0098A184 /* ConcurrentOperation.swift in Sources */,
 				C47FAF4D22EFA4530098A184 /* AppDelegate.swift in Sources */,
-				C47FAF7322EFAC0B0098A184 /* PokeDictionary.swift in Sources */,
-				C47FAF7122EFABC70098A184 /* Pokemon.swift in Sources */,
+				C47FAF7322EFAC0B0098A184 /* GameObjects.swift in Sources */,
+				C47FAF7122EFABC70098A184 /* PokemonDetails.swift in Sources */,
 				C47FAF7522EFB0AF0098A184 /* PokedexAPI.swift in Sources */,
 				C47FAF8522EFC6D80098A184 /* FetchPokemonDetailsOperation.swift in Sources */,
 				C47FAF7D22EFC1DC0098A184 /* PokemonForms.swift in Sources */,
