@@ -2,7 +2,7 @@
 //  FetchPokemonDetailsOperation.swift
 //  PokdexGo.v2
 //
-//  Created by Kobe McKee on 7/29/19.
+//  Created by Kobe McKee on 7/31/19.
 //  Copyright © 2019 Kobe McKee. All rights reserved.
 //
 
@@ -10,65 +10,90 @@ import Foundation
 
 class FetchPokemonDetailsOperation: ConcurrentOperation {
     
-    private(set) var pokemonDetailsArray: [PokemonDetails]?
+    var baseURL = URL(string: "https://raw.githubusercontent.com/pokemongo-dev-contrib/pokemongo-game-master/master/versions/latest/GAME_MASTER.json")!
+    
+    private(set) var pokemon: Pokemon?
     private var dataTask: URLSessionDataTask?
-    private var session: URLSession
+    private let session: URLSession
     
     let pokemonName: String
     
-    init(form: PokemonForms, session: URLSession = URLSession.shared) {
-        self.pokemonName = form.pokemonName
+    init(pokemonName: String, session: URLSession = URLSession.shared) {
+        self.pokemonName = pokemonName
         self.session = session
         super.init()
     }
     
     
-    var baseURL = URL(string: "https://raw.githubusercontent.com/pokemongo-dev-contrib/pokemongo-game-master/master/versions/latest/GAME_MASTER.json")!
-    
     override func start() {
         super.start()
         state = .isExecuting
         
-        let dataTask = URLSession.shared.dataTask(with: baseURL) { (data, _, error) in
+        
+        let task = session.dataTask(with: baseURL) { (data, response, error) in
             defer { self.state = .isFinished }
             if self.isCancelled { return }
-            
+         
             if let error = error {
-                NSLog("Error fetching pokemon: \(error)")
-
+                NSLog("Error fetching pokemon details: \(error)")
                 return
             }
             
             guard let data = data else {
-                NSLog("No data returned when fetching pokemon")
+                NSLog("No data returned when fetching pokmeon details")
                 return
             }
             
             do {
-                let pokedexDict = try JSONDecoder().decode(GameObjects.self, from: data)
-                let templates = pokedexDict.itemTemplates
-                let pokemons = templates.compactMap({ $0.pokemon })
                 
-                var pokemonArray: [PokemonDetails] = []
-                for pokemon in pokemons {
-                    if pokemon.pokemonId.contains(self.pokemonName) {
-                        pokemonArray.append(pokemon)
+                let results = try JSONDecoder().decode(PokemonResults.self, from: data)
+                let templates = results.itemTemplates
+                let forms = templates.compactMap({ $0.formSettings })
+                var formArray: [FormSettings] = []
+                for form in forms {
+                    if form.pokemon.contains(self.pokemonName) {
+                        formArray.append(form)
+                    }
+                    
+                }
+                
+                let details = templates.compactMap({ $0.pokemonSettings })
+                var detailsArray: [PokemonSettings] = []
+                for detail in details {
+                    guard let id = detail.pokemonID else { continue }
+                    if id.contains(self.pokemonName) {
+                        detailsArray.append(detail)
                     }
                 }
                 
-                self.pokemonDetailsArray = pokemonArray
-                
-            } catch {
-                NSLog("Error decoding pokedex dictionary: \(error)")
+                let newPokemon = Pokemon(pokemonName: self.pokemonName, pokemonSettingsArray: detailsArray, formSettingsArray: formArray)
+                self.pokemon = newPokemon
                 
                 return
+            } catch {
+                NSLog("Error decoding pokemon: \(error)")
+                return
             }
+            
+            
+            
         }
-        dataTask.resume()
-        
+
+        task.resume()
+        dataTask? = task
+    }
+    
+    
+    override func cancel() {
+        super.cancel()
+        dataTask?.cancel()
     }
     
     
     
     
+    
+    
+    
 }
+

@@ -13,13 +13,18 @@ private let reuseIdentifier = "PokemonCell"
 
 class PokedexCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
 
+    
+    let cache = Cache<String, Pokemon>()
+    private let fetchPokemonQueue = OperationQueue()
+    private var operations = [String : Operation]()
+    
+    
     let pokeAPI = PokedexAPI()
     
-    private var pokemonForms = [PokemonForms]() {
+    private var pokemonNames = [String]() {
         didSet {
             DispatchQueue.main.async {
                 self.collectionView.reloadData()
-                print(self.pokemonForms)
             }
         }
     }
@@ -37,17 +42,24 @@ class PokedexCollectionViewController: UICollectionViewController, UICollectionV
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        pokeAPI.fetchPokemonForms { (forms, error) in
+//        pokeAPI.fetchPokemonForms { (forms, error) in
+//            if let error = error {
+//                NSLog("Error fetching pokemon: \(error)")
+//                return
+//            }
+//            guard let formArray = forms else { return }
+//            self.pokemonForms = formArray
+//        }
+//
+        pokeAPI.fetchPokemonNames { (pokemonNames, error) in
             if let error = error {
-                NSLog("Error fetching pokemon: \(error)")
+                NSLog("Error fetching pokemon names")
                 return
             }
-            guard let formArray = forms else { return }
-            self.pokemonForms = formArray
+            guard let pokemonList = pokemonNames else { return }
+            self.pokemonNames = pokemonList
         }
-        
-        
-        //pokeAPI.fetchSquirtle()
+
         
         let backgroundImage = UIImage(named: "Team_instinct_loading_screen")!
         let imageView = UIImageView(image: backgroundImage)
@@ -104,19 +116,75 @@ class PokedexCollectionViewController: UICollectionViewController, UICollectionV
 
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return pokemonForms.count
+        return pokemonNames.count
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as? PokemonCollectionViewCell else { return UICollectionViewCell() }
     
-        let poke = pokemonForms[indexPath.row]
+        let poke = pokemonNames[indexPath.row]
         
-        cell.imageView.image = UIImage(named: "pokemon_icon_103_00")
-        cell.pokemonLabel.text = poke.pokemonName.capitalized
         
+        
+        fetchPokemon(forcell: cell, indexPath: indexPath, pokemonName: poke)
+
+        
+        
+        cell.imageView.image = UIImage(named: "pokeball")
+        cell.pokemonLabel.text = poke.capitalized
     
         return cell
+    }
+    
+    
+    
+    override func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        let pokemonName = pokemonNames[indexPath.row]
+        operations[pokemonName]?.cancel()
+    }
+    
+    
+    
+    
+    func fetchPokemon(forcell cell: PokemonCollectionViewCell, indexPath: IndexPath, pokemonName: String) {
+        
+        if let cachedPokemon = cache.value(key: pokemonName) {
+            cell.pokemon = cachedPokemon
+            return
+        }
+        
+        let fetchOp = FetchPokemonDetailsOperation(pokemonName: pokemonName)
+        let cacheOp = BlockOperation {
+            if let data = fetchOp.pokemon {
+                self.cache.cache(value: data, key: pokemonName)
+            }
+        }
+        
+        
+        let checkReuseOp = BlockOperation {
+            if let currentIndexPath = self.collectionView.indexPath(for: cell),
+                currentIndexPath != indexPath {
+                return
+            }
+            if let data = fetchOp.pokemon {
+                cell.pokemon = data
+            }
+        }
+        
+        cacheOp.addDependency(fetchOp)
+        checkReuseOp.addDependency(fetchOp)
+        
+        fetchPokemonQueue.addOperation(fetchOp)
+        fetchPokemonQueue.addOperation(cacheOp)
+        OperationQueue.main.addOperation(checkReuseOp)
+        
+        operations[pokemonName] = fetchOp
+        
+        
+    }
+    
+    func fetchPokemonSprites(pokemon: Pokemon) {
+        
     }
     
 
