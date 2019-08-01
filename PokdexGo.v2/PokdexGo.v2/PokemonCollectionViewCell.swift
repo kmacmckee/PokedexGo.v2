@@ -16,9 +16,5 @@ class PokemonCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var pokemonLabel: UILabel!
     
-//    override func prepareForReuse() {
-//        super.prepareForReuse()
-//        imageView.image = #imageLiteral(resourceName: "MarsPlaceholder")
-//    }
     
 }

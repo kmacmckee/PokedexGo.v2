@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreImage
+import CoreGraphics
 
 private let reuseIdentifier = "PokemonCell"
 
@@ -46,12 +47,39 @@ class PokedexCollectionViewController: UICollectionViewController, UICollectionV
         }
 
         
-        let backgroundImage = UIImage(named: "Team_instinct_loading_screen")!
+        let backgroundImage = UIImage(named: "Team_mystic_loading_screen")!
         let imageView = UIImageView(image: backgroundImage)
         self.collectionView.backgroundView = imageView
         
+        
+        addNavBarImage()
+        
 
     }
+    
+    
+    func addNavBarImage() {
+        
+        let navController = navigationController!
+        
+        let image = UIImage(named: "pokeball")!
+        let imageView = UIImageView(image: image)
+        
+        let bannerWidth = navController.navigationBar.frame.size.width
+        let bannerHeight = navController.navigationBar.frame.size.height
+        
+        let bannerX = bannerWidth / 2 - image.size.width / 2
+        let bannerY = bannerHeight / 2 - image.size.height / 2
+        
+        
+        imageView.frame = CGRect(x: bannerX, y: bannerY, width: bannerWidth, height: bannerHeight)
+        imageView.contentMode = .scaleAspectFit
+        imageView.addShadow()
+        
+        navigationItem.titleView = imageView
+        
+    }
+    
     
     
     // MARK: - Layout
@@ -82,7 +110,7 @@ class PokedexCollectionViewController: UICollectionViewController, UICollectionV
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as? PokemonCollectionViewCell else { return UICollectionViewCell() }
-    
+        
         let poke = pokemonNames[indexPath.row]
         //print("\(poke): \(indexPath.row)")
         let id = indexPath.row + 1
@@ -99,11 +127,10 @@ class PokedexCollectionViewController: UICollectionViewController, UICollectionV
         cell.pokemonId = idString2
         
         
-        
-        
         fetchPokemon(forcell: cell, indexPath: indexPath, pokemonName: poke)
-                
-
+        
+        cell.imageView.addShadow()
+        
         let image = UIImage(named: "pokemon_icon_\(idString2)_00")
         
         if image != nil {
