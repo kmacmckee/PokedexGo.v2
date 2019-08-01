@@ -9,7 +9,7 @@
 import Foundation
 
 struct PokemonSettings: Codable {
-    let pokemonID: String?
+    let pokemonId: String?
     let modelScale: Double
     let type: String?
     let type2: String?
@@ -19,13 +19,13 @@ struct PokemonSettings: Codable {
     let quickMoves: [String]?
     let cinematicMoves: [String]?
     let animationTime: [Double]
-    let evolutionIDS: [String]?
+    let evolutionIds: [String]?
     let evolutionPips: Int
     let pokedexHeightM: Double
     let pokedexWeightKg: Double
     let heightStdDev: Double
     let weightStdDev: Double
-    let familyID: String?
+    let familyId: String?
     let candyToEvolve: Int?
     let kmBuddyDistance: Int
     let modelHeight: Double
@@ -39,7 +39,7 @@ struct PokemonSettings: Codable {
     let isDeployable: Bool?
     let form: String?
     let shadow: Shadow?
-    let parentPokemonID: String?
+    let parentPokemonId: String?
     let buddySize: String?
     let combatShoulderCameraAngle: [Double]?
     let combatDefaultCameraAngle: [Double]?

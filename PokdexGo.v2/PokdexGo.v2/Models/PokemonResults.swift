@@ -19,6 +19,7 @@ struct Templates: Codable {
     var combatMove: CombatMove?
     var formSettings: FormSettings?
     var pokemonSettings: PokemonSettings?
+    //var typeEffective: PokemonType?
     
 }
 

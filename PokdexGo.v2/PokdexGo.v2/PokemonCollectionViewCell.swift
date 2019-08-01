@@ -10,17 +10,15 @@ import UIKit
 
 class PokemonCollectionViewCell: UICollectionViewCell {
     
-    var pokemon: Pokemon? {
-        didSet {
-            print(pokemon)
-        }
-    }
+    var pokemon: Pokemon?
+    var pokemonId: String?
+
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var pokemonLabel: UILabel!
     
-    override func prepareForReuse() {
-        super.prepareForReuse()
-        imageView.image = #imageLiteral(resourceName: "MarsPlaceholder")
-    }
+//    override func prepareForReuse() {
+//        super.prepareForReuse()
+//        imageView.image = #imageLiteral(resourceName: "MarsPlaceholder")
+//    }
     
 }

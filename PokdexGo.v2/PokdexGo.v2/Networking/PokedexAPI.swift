@@ -13,7 +13,6 @@ class PokedexAPI {
     
     var baseURL = URL(string: "https://raw.githubusercontent.com/pokemongo-dev-contrib/pokemongo-game-master/master/versions/latest/GAME_MASTER.json")!
     
-    var results: PokemonResults?
     var pokemons: [Pokemon]?
     
     func fetchPokemonNames(completion: @escaping ([String]?, Error?) -> Void) {
@@ -109,6 +108,63 @@ class PokedexAPI {
 //   
 //    }
 
+    
+    
+//    func fetchPokemonType(pokemon: Pokemon, completion: @escaping ([PokemonType]?, Error?) -> Void) {
+//        
+//        var type1String: String = ""
+//        var type2String: String = ""
+//        
+//        if let type1 = pokemon.pokemonSettingsArray?.first?.type {
+//            type1String = type1
+//        }
+//        if let type2 = pokemon.pokemonSettingsArray?.first?.type2 {
+//            type2String = type2
+//        }
+//        
+//        let dataTask = URLSession.shared.dataTask(with: baseURL) { (data, _, error) in
+//            
+//                if let error = error {
+//                    NSLog("Error fetching typing: \(error)")
+//                    completion(nil, error)
+//                    return
+//                }
+//    
+//                guard let data = data else {
+//                    NSLog("No data returned for type")
+//                    completion(nil, NSError())
+//                    return
+//                }
+//            
+//            do {
+//                let results = try JSONDecoder().decode(PokemonResults.self, from: data)
+//                let templates = results.itemTemplates
+//                let types = templates.compactMap({ $0.typeEffective })
+//                
+//                var returnTypes: [PokemonType] = []
+//                
+//                for type in types {
+//                    if type.attackType == type1String {
+//                        returnTypes.append(type)
+//                    }
+//                    if type2String != "" {
+//                        if type.attackType == type2String {
+//                            returnTypes.append(type)
+//                        }
+//                    }
+//                    
+//                }
+//                completion(returnTypes, nil)
+//                return
+//                
+//            } catch {
+//                NSLog("Error decoding pokemon types: \(error)")
+//                completion(nil, error)
+//                return
+//            }
+//        }
+//        dataTask.resume()
+//    }
     
     
 

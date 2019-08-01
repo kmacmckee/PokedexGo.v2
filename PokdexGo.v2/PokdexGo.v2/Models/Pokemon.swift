@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 struct Pokemon {
     
@@ -15,7 +16,11 @@ struct Pokemon {
     
     var pokemonSettingsArray: [PokemonSettings]?
     var formSettingsArray: [FormSettings]?
+    var sprites: [UIImage]?
+    //var types: [PokeType]?
     
+    
+
     
     
     

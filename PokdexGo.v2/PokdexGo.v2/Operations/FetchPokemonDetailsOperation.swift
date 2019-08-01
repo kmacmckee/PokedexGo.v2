@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 class FetchPokemonDetailsOperation: ConcurrentOperation {
     
@@ -60,13 +61,13 @@ class FetchPokemonDetailsOperation: ConcurrentOperation {
                 let details = templates.compactMap({ $0.pokemonSettings })
                 var detailsArray: [PokemonSettings] = []
                 for detail in details {
-                    guard let id = detail.pokemonID else { continue }
+                    guard let id = detail.pokemonId else { continue }
                     if id.contains(self.pokemonName) {
                         detailsArray.append(detail)
                     }
                 }
                 
-                let newPokemon = Pokemon(pokemonName: self.pokemonName, pokemonSettingsArray: detailsArray, formSettingsArray: formArray)
+                let newPokemon = Pokemon(pokemonName: self.pokemonName, pokemonSettingsArray: detailsArray, formSettingsArray: formArray, sprites: nil)
                 self.pokemon = newPokemon
                 
                 return
