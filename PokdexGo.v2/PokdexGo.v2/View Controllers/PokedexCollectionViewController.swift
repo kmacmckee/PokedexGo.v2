@@ -138,7 +138,9 @@ class PokedexCollectionViewController: UICollectionViewController, UICollectionV
             cell.imageView.image = UIImage(named: "pokeball")
         }
         
-        cell.pokemonLabel.text = poke.capitalized
+        let formattedName = poke.replacingOccurrences(of: "_", with: " ")
+        
+        cell.pokemonLabel.text = formattedName.capitalized
     
         return cell
     }
