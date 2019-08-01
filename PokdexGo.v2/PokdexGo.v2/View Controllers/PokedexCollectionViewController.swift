@@ -114,8 +114,11 @@ class PokedexCollectionViewController: UICollectionViewController, UICollectionV
         
         let poke = pokemonNames[indexPath.row]
         //print("\(poke): \(indexPath.row)")
-        let id = indexPath.row + 1
         
+        fetchPokemon(forcell: cell, indexPath: indexPath, pokemonName: poke)
+        
+        
+        let id = indexPath.row + 1
         let idString = String(id)
         var idArray = idString.compactMap( { $0 })
         if idArray.count < 2 {
@@ -127,13 +130,8 @@ class PokedexCollectionViewController: UICollectionViewController, UICollectionV
         let idString2 = String(idArray)
         cell.pokemonId = idString2
         
-        
-        fetchPokemon(forcell: cell, indexPath: indexPath, pokemonName: poke)
-        
         cell.imageView.addShadow()
-        
         let image = UIImage(named: "pokemon_icon_\(idString2)_00")
-        
         if image != nil {
             cell.imageView.image = image
         } else {
@@ -173,6 +171,7 @@ class PokedexCollectionViewController: UICollectionViewController, UICollectionV
         
         
         let checkReuseOp = BlockOperation {
+            defer { self.operations.removeValue(forKey: pokemonName)}
             if let currentIndexPath = self.collectionView.indexPath(for: cell),
                 currentIndexPath != indexPath {
                 return
@@ -182,6 +181,7 @@ class PokedexCollectionViewController: UICollectionViewController, UICollectionV
             }
         }
         
+        
         cacheOp.addDependency(fetchOp)
         checkReuseOp.addDependency(fetchOp)
         
@@ -190,6 +190,7 @@ class PokedexCollectionViewController: UICollectionViewController, UICollectionV
         OperationQueue.main.addOperation(checkReuseOp)
         
         operations[pokemonName] = fetchOp
+        //print(operations)
         
         
     }
@@ -202,9 +203,12 @@ class PokedexCollectionViewController: UICollectionViewController, UICollectionV
             NSLog("Pokemon not loaded yet")
             return
         }
-        
+
         seguePokemon = currentCell.pokemon
         seguePokemonId = currentCell.pokemonId
+        
+        
+        
         fetchPokemonQueue.addOperation {
             DispatchQueue.main.async {
                 self.performSegue(withIdentifier: "PokemonDetailSegue", sender: self)
@@ -221,11 +225,6 @@ class PokedexCollectionViewController: UICollectionViewController, UICollectionV
             detailVC.pokemonId = self.seguePokemonId
 
         }
-        
-        
-        
-        
-
      }
 
 }

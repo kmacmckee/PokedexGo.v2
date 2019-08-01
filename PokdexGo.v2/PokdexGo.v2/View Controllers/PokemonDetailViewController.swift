@@ -7,19 +7,20 @@
 //
 
 import UIKit
+import CoreGraphics
 
 class PokemonDetailViewController: UIViewController {
 
-    @IBOutlet weak var spriteImageView: UIImageView!
-    @IBOutlet weak var typeImageView: UIImageView!
     @IBOutlet weak var type2ImageView: UIImageView!
+    @IBOutlet weak var type1ImageView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
-    
+    @IBOutlet weak var spriteImageView: UIImageView!
     
     
     var pokemon: Pokemon?
     var pokemonId: String?
     var sprites: [UIImage] = []
+    var spriteIndex = 0
     var typeImages: [UIImage] = []
     
     
@@ -27,7 +28,7 @@ class PokemonDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        guard let pokemon = pokemon,
+        guard let _ = pokemon,
             let pokemonId = pokemonId else {
                 NSLog("Error occured during ViewDidLoad")
                 return
@@ -35,20 +36,35 @@ class PokemonDetailViewController: UIViewController {
         }
         print(pokemonId)
         getSprites(id: pokemonId)
-        //getTypeImages(pokemon: pokemon)
         
+        spriteImageView.isUserInteractionEnabled = true
+        
+        let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(self.respondToSwipeGesture(gesture:)))
+        swipeRight.direction = UISwipeGestureRecognizer.Direction.right
+        spriteImageView.addGestureRecognizer(swipeRight)
+        
+        let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(self.respondToSwipeGesture(gesture:)))
+        swipeLeft.direction = UISwipeGestureRecognizer.Direction.left
+        spriteImageView.addGestureRecognizer(swipeLeft)
+        
+        
+        
+        //getTypeImages(pokemon: pokemon)
     }
     
     func updateViews() {
-        spriteImageView.image = sprites.first
-        spriteImageView.addShadow()
         nameLabel.text = pokemon?.pokemonName
-        
+        spriteImageView.image = sprites[spriteIndex]
+        spriteImageView.addShadow()
+        type1ImageView.image = UIImage(named: "icon_Grass")
+        type2ImageView.image = UIImage(named: "icon_Poison")
+        view.backgroundColor = UIColor(displayP3Red: 0 / 255, green: 46 / 255, blue: 56 / 255, alpha: 1)
     }
     
     
     
     func getSprites(id: String) {
+        self.sprites = []
         
         if let image1 = UIImage(named: "pokemon_icon_\(id)_00") { sprites.append(image1) }
         if let image2 = UIImage(named: "pokemon_icon_\(id)_00_shiny") { sprites.append(image2) }
@@ -89,9 +105,32 @@ class PokemonDetailViewController: UIViewController {
         updateViews()
     }
     
-    
-    
-    
+    @objc func respondToSwipeGesture(gesture: UIGestureRecognizer) {
+        if let swipeGesture = gesture as? UISwipeGestureRecognizer {
+            
+            switch swipeGesture.direction {
+            case UISwipeGestureRecognizer.Direction.left:
+                if spriteIndex == sprites.count - 1 {
+                    spriteIndex = 0
+                } else {
+                    spriteIndex += 1
+                }
+                spriteImageView.image = sprites[spriteIndex]
+                spriteImageView.addShadow()
+                
+            case UISwipeGestureRecognizer.Direction.right:
+                if spriteIndex == 0 {
+                    spriteIndex = sprites.count - 1
+                } else {
+                    spriteIndex -= 1
+                }
+                spriteImageView.image = sprites[spriteIndex]
+                spriteImageView.addShadow()
+            default:
+                break
+            }
+        }
+    }
 
 
 
