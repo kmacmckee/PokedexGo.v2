@@ -41,6 +41,7 @@ class PokemonDetailViewController: UIViewController {
     
     func updateViews() {
         spriteImageView.image = sprites.first
+        spriteImageView.addShadow()
         nameLabel.text = pokemon?.pokemonName
         
     }

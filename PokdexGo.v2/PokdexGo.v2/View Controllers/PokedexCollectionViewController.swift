@@ -76,6 +76,7 @@ class PokedexCollectionViewController: UICollectionViewController, UICollectionV
         imageView.contentMode = .scaleAspectFit
         imageView.addShadow()
         
+        
         navigationItem.titleView = imageView
         
     }

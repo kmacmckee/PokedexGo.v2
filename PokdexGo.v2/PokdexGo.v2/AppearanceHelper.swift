@@ -70,6 +70,10 @@ enum AppearanceHelper {
     
     static func setAppearance() {
         
+        //UINavigationBar.appearance().tintColor = UIColor(displayP3Red: 174 / 255, green: 175 / 255, blue: 178 / 255, alpha: 1)
+        UINavigationBar.appearance().barTintColor = UIColor(displayP3Red: 174 / 255, green: 175 / 255, blue: 178 / 255, alpha: 1)
+        
+        
     }
     
     
