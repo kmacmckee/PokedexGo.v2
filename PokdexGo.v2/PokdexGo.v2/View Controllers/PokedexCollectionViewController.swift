@@ -32,6 +32,33 @@ class PokedexCollectionViewController: UICollectionViewController, UICollectionV
         }
     }
     
+    
+    func updateViews() {
+        
+        var backgroundImage: UIImage
+        if UserDefaults.standard.bool(forKey: "teamMystic") == true {
+            backgroundImage = AppearanceHelper.mysticBg
+        } else if UserDefaults.standard.bool(forKey: "teamValor") == true {
+            backgroundImage = AppearanceHelper.valorBg
+        } else if UserDefaults.standard.bool(forKey: "teamInstinct") == true {
+            backgroundImage = AppearanceHelper.instinctBg
+        } else {
+            backgroundImage = AppearanceHelper.mysticBg
+        }
+        
+        let imageView = UIImageView(image: backgroundImage)
+        self.collectionView.backgroundView = imageView
+        
+        
+        addNavBarImage()
+    }
+    
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        updateViews()
+    }
+    
 
     
     override func viewDidLoad() {
@@ -46,14 +73,7 @@ class PokedexCollectionViewController: UICollectionViewController, UICollectionV
             self.pokemonNames = pokemonList
         }
 
-        
-        let backgroundImage = UIImage(named: "Team_mystic_loading_screen")!
-        let imageView = UIImageView(image: backgroundImage)
-        self.collectionView.backgroundView = imageView
-        
-        
-        addNavBarImage()
-        
+        updateViews()
 
     }
     

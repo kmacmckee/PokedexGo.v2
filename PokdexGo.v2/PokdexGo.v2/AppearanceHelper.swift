@@ -85,6 +85,13 @@ enum AppearanceHelper {
     static let waterBg = UIImage(named: "details_type_bg_water")!
     
     
+    static let mysticBg = UIImage(named: "Team_mystic_loading_screen")!
+    static let valorBg = UIImage(named: "Team_valor_loading_screen")!
+    static let instinctBg = UIImage(named: "Team_instinct_loading_screen")!
+    
+    
+    static let backgroundColor = UIColor(displayP3Red: 0 / 255, green: 46 / 255, blue: 56 / 255, alpha: 1)
+    
     
     static func setAppearance() {
         

@@ -80,7 +80,7 @@ class PokemonDetailViewController: UIViewController, UITableViewDelegate, UITabl
         getTypeDetails()
     
         
-        view.backgroundColor = UIColor(displayP3Red: 0 / 255, green: 46 / 255, blue: 56 / 255, alpha: 1)
+        view.backgroundColor = AppearanceHelper.backgroundColor
         type1ImageView.image = type1Icon
         type2ImageView.image = type2Icon
         backgroundImageView.image = type1Bg
@@ -150,8 +150,8 @@ class PokemonDetailViewController: UIViewController, UITableViewDelegate, UITabl
         if let image8 = UIImage(named: "pokemon_icon_\(id)_03_shiny") { sprites.append(image8) }
         if let image9 = UIImage(named: "pokemon_icon_\(id)_04") { sprites.append(image9) }
         if let image10 = UIImage(named: "pokemon_icon_\(id)_04_shiny") { sprites.append(image10) }
-        if let image11 = UIImage(named: "pokemon_icon_\(id)_05") { sprites.append(image11) }
-        if let image12 = UIImage(named: "pokemon_icon_\(id)_05_shiny") { sprites.append(image12) }
+        if let image11 = UIImage(named: "pokemon_icon_\(id)_00_05") { sprites.append(image11) }
+        if let image12 = UIImage(named: "pokemon_icon_\(id)_00_05_shiny") { sprites.append(image12) }
         if let image13 = UIImage(named: "pokemon_icon_\(id)_06") { sprites.append(image13) }
         if let image14 = UIImage(named: "pokemon_icon_\(id)_06_shiny") { sprites.append(image14) }
         if let image15 = UIImage(named: "pokemon_icon_\(id)_07") { sprites.append(image15) }

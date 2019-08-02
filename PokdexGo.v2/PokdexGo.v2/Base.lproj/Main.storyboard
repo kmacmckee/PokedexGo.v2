@@ -10,6 +10,66 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--Settings View Controller-->
+        <scene sceneID="Yhw-TT-F2i">
+            <objects>
+                <viewController id="orz-bA-8fn" customClass="SettingsViewController" customModule="PokdexGo_v2" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="g0Z-07-l2V">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select Your Team" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nTT-aC-vsh">
+                                <rect key="frame" x="121.5" y="80" width="171" height="29"/>
+                                <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="22"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="8pJ-3y-QuD">
+                                <rect key="frame" x="16" y="133" width="382" height="30"/>
+                                <segments>
+                                    <segment title="Mystic"/>
+                                    <segment title="Valor"/>
+                                    <segment title="Instinct"/>
+                                </segments>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <connections>
+                                    <action selector="teamIndexChanged:" destination="orz-bA-8fn" eventType="valueChanged" id="yXu-HZ-P9F"/>
+                                </connections>
+                            </segmentedControl>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gtf-ys-Jkj">
+                                <rect key="frame" x="36" y="430.5" width="342" height="35"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" title="Done"/>
+                                <connections>
+                                    <action selector="donePressed:" destination="orz-bA-8fn" eventType="touchUpInside" id="ZRp-NI-JKA"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="0.0" green="0.3294117647" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="gtf-ys-Jkj" firstAttribute="leading" secondItem="dxN-Nr-F3i" secondAttribute="leading" constant="36" id="BWA-It-vTF"/>
+                            <constraint firstItem="nTT-aC-vsh" firstAttribute="centerX" secondItem="g0Z-07-l2V" secondAttribute="centerX" id="CxQ-Aw-KmL"/>
+                            <constraint firstItem="gtf-ys-Jkj" firstAttribute="centerX" secondItem="g0Z-07-l2V" secondAttribute="centerX" id="Kn7-Dt-8rD"/>
+                            <constraint firstItem="dxN-Nr-F3i" firstAttribute="trailing" secondItem="8pJ-3y-QuD" secondAttribute="trailing" constant="16" id="QW0-cN-9F1"/>
+                            <constraint firstItem="8pJ-3y-QuD" firstAttribute="leading" secondItem="dxN-Nr-F3i" secondAttribute="leading" constant="16" id="dtm-ub-I61"/>
+                            <constraint firstItem="8pJ-3y-QuD" firstAttribute="top" secondItem="nTT-aC-vsh" secondAttribute="bottom" constant="24" id="gwz-83-kSV"/>
+                            <constraint firstItem="8pJ-3y-QuD" firstAttribute="height" secondItem="nTT-aC-vsh" secondAttribute="height" id="otB-nD-YQ8"/>
+                            <constraint firstItem="gtf-ys-Jkj" firstAttribute="centerY" secondItem="g0Z-07-l2V" secondAttribute="centerY" id="sjE-4w-lYR"/>
+                            <constraint firstItem="nTT-aC-vsh" firstAttribute="top" secondItem="dxN-Nr-F3i" secondAttribute="top" constant="36" id="xpC-vD-wUH"/>
+                            <constraint firstItem="dxN-Nr-F3i" firstAttribute="trailing" secondItem="gtf-ys-Jkj" secondAttribute="trailing" constant="36" id="xpn-jf-afg"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="dxN-Nr-F3i"/>
+                    </view>
+                    <connections>
+                        <outlet property="teamSegmentedControl" destination="8pJ-3y-QuD" id="xeq-D2-4xb"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fm9-H1-uaK" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2096" y="-586"/>
+        </scene>
         <!--Pokedex Collection View Controller-->
         <scene sceneID="4SP-i4-UDa">
             <objects>
@@ -63,7 +123,13 @@
                             <outlet property="delegate" destination="IOA-g0-tno" id="BVG-NK-Z2m"/>
                         </connections>
                     </collectionView>
-                    <navigationItem key="navigationItem" id="PmQ-je-TgK"/>
+                    <navigationItem key="navigationItem" id="PmQ-je-TgK">
+                        <barButtonItem key="leftBarButtonItem" title="Item" image="settings" id="yHo-qr-YfS">
+                            <connections>
+                                <segue destination="orz-bA-8fn" kind="presentation" id="fl7-RO-HRr"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <segue destination="fFT-V5-e9f" kind="show" identifier="PokemonDetailSegue" id="KTZ-cl-fYi"/>
                     </connections>
@@ -243,5 +309,6 @@
     <resources>
         <image name="details_type_bg_fighting" width="256" height="256"/>
         <image name="pokemon_icon_006_00" width="256" height="256"/>
+        <image name="settings" width="30" height="30"/>
     </resources>
 </document>

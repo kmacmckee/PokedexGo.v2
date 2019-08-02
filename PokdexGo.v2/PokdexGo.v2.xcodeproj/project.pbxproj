@@ -25,6 +25,7 @@
 		C495831E22F28DEF00D40D18 /* UIImageView+Shadow.swift in Sources */ = {isa = PBXBuildFile; fileRef = C495831D22F28DEF00D40D18 /* UIImageView+Shadow.swift */; };
 		C49B2DA622F1202600BF9618 /* PokemonResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = C49B2DA522F1202600BF9618 /* PokemonResults.swift */; };
 		C49B2DA822F1224100BF9618 /* Pokemon.swift in Sources */ = {isa = PBXBuildFile; fileRef = C49B2DA722F1224100BF9618 /* Pokemon.swift */; };
+		C4EA689522F49E9500F2CEEB /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4EA689422F49E9500F2CEEB /* SettingsViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,6 +61,7 @@
 		C495831D22F28DEF00D40D18 /* UIImageView+Shadow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Shadow.swift"; sourceTree = "<group>"; };
 		C49B2DA522F1202600BF9618 /* PokemonResults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonResults.swift; sourceTree = "<group>"; };
 		C49B2DA722F1224100BF9618 /* Pokemon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pokemon.swift; sourceTree = "<group>"; };
+		C4EA689422F49E9500F2CEEB /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -152,6 +154,7 @@
 			children = (
 				C47FAF6C22EFA7140098A184 /* PokedexCollectionViewController.swift */,
 				C47FAF8022EFC4790098A184 /* PokemonDetailViewController.swift */,
+				C4EA689422F49E9500F2CEEB /* SettingsViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -273,6 +276,7 @@
 				C47FAF7122EFABC70098A184 /* PokemonSettings.swift in Sources */,
 				C495831822F2683600D40D18 /* AppearanceHelper.swift in Sources */,
 				C47FAF7522EFB0AF0098A184 /* PokedexAPI.swift in Sources */,
+				C4EA689522F49E9500F2CEEB /* SettingsViewController.swift in Sources */,
 				C495831A22F2722600D40D18 /* PokemonType.swift in Sources */,
 				C495831622F2249500D40D18 /* FetchPokemonDetailsOperation.swift in Sources */,
 				C495831422F221EA00D40D18 /* Cache.swift in Sources */,
